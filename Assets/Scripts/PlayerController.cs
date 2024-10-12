@@ -61,8 +61,8 @@ public class PlayerController : MonoBehaviour {
 		
 		isWalking = moveDir != Vector3.zero;
 
-		//float rotateSpeed = 10f;
-		//transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
+		float rotateSpeed = 10f;
+		transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
 	}
 
 	public bool IsWalking() {
