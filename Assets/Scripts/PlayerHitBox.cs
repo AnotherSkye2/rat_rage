@@ -10,7 +10,7 @@ public class PlayerHitBox : MonoBehaviour
 	private FunctionTimer colliderTimer;
 
 	private void Awake() {
-		colliderTimer = new FunctionTimer(DisableCollider, 1f);
+		colliderTimer = new FunctionTimer(DisableCollider, 0.1f);
 		gameInput.OnPunch += GameInput_OnPunch;
 		coll = gameObject.GetComponent<Collider>();
 	}
@@ -22,16 +22,16 @@ public class PlayerHitBox : MonoBehaviour
 	}
 
 	private void GameInput_OnPunch(object sender, System.EventArgs e) {
-		colliderTimer.SetTime(1f);
+		colliderTimer.SetTime(0.1f);
 		EnableCollider();
 	}
 
-	private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == "enemy") {
-			Debug.Log("ded Xo");
-			Destroy(other.gameObject);
-		}
-	}
+	//private void OnTriggerEnter(Collider other) {
+	//	if (other.gameObject.tag == "enemy") {
+	//		Debug.Log("ded Xo");
+	//		Destroy(other.gameObject);
+	//	}
+	//}
 	
 	private void EnableCollider() {
 		Debug.Log("enable!");
