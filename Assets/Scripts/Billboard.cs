@@ -20,7 +20,6 @@ public class Billboard : MonoBehaviour
 	private void LateUpdate() {
 
         if (!useStaticBillboard) {
-
 		    transform.LookAt(cam.transform);
         } else {
             transform.rotation = cam.transform.rotation;

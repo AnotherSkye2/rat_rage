@@ -8,6 +8,8 @@ public class FurnitureObjectSO : ScriptableObject {
 	public Transform prefab;
 
 	public int hitPoints;
-	public Texture[] images;
+	public int scoreValue;
+	public Sprite[] images;
+	public AudioClip[] sounds;
 
 }
