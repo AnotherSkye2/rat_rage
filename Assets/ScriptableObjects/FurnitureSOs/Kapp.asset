@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419a2333e8777e540b6806fcac688cb9, type: 3}
+  m_Name: Kapp
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8789589666194776961, guid: d581182c051c93344841e8f09e1e354c, type: 3}
+  hitPoints: 2
+  scoreValue: 1000
+  images:
+  - {fileID: 21300000, guid: be62224cd6bad1f418d6752a38868997, type: 3}
+  - {fileID: 21300000, guid: f1e58ede778b3b6459e544cc7d72dfa8, type: 3}
+  - {fileID: 21300000, guid: 37e0cb63d5356d24981096eaedd0bd41, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 24e21fdeca9605748b8165d05104947a, type: 3}
+  - {fileID: 8300000, guid: 52f25b8c1b8cd074693f78bb59852d3a, type: 3}
+  - {fileID: 8300000, guid: f19263f47f3303744804f9b4b9e408a8, type: 3}

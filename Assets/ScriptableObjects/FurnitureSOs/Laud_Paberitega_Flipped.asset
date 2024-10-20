@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419a2333e8777e540b6806fcac688cb9, type: 3}
+  m_Name: Laud_Paberitega_Flipped
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3493857712508170583, guid: 89ffc55165c48ec42a93c35f4a2fae1a, type: 3}
+  hitPoints: 3
+  scoreValue: 1700
+  images:
+  - {fileID: 21300000, guid: 4f2afb263dba3b34f94b560fd18f251b, type: 3}
+  - {fileID: 21300000, guid: 4f2afb263dba3b34f94b560fd18f251b, type: 3}
+  - {fileID: 21300000, guid: 4f2afb263dba3b34f94b560fd18f251b, type: 3}
+  - {fileID: 21300000, guid: 90bb5c2722f94ac44ae1976c4d67860a, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 03139f21a9458e6458d9599f6f3dee51, type: 3}
+  - {fileID: 8300000, guid: f284c0e0998dd9e4eaac9819226e3eec, type: 3}
+  - {fileID: 8300000, guid: ca4dde0ba52199345b94c4bf4e8ea9de, type: 3}

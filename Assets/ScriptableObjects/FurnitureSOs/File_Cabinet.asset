@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419a2333e8777e540b6806fcac688cb9, type: 3}
+  m_Name: File_Cabinet
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8789589666194776961, guid: 275e2a17bcc69da4e8176d44035daf9c, type: 3}
+  hitPoints: 4
+  scoreValue: 2000
+  images:
+  - {fileID: 21300000, guid: d6ab27c2eeb3a1c40990aa8405def7c3, type: 3}
+  - {fileID: 21300000, guid: d6ab27c2eeb3a1c40990aa8405def7c3, type: 3}
+  - {fileID: 21300000, guid: d9412a2fa04691a42a74bba65a94e1a7, type: 3}
+  - {fileID: 21300000, guid: d9412a2fa04691a42a74bba65a94e1a7, type: 3}
+  - {fileID: 21300000, guid: 03318a78a882e6048910536e87c328cb, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 3e2940ae0f9ad254f9eb3c00bb3fb637, type: 3}
+  - {fileID: 8300000, guid: 3afc56f1f49265346b9562af11777e84, type: 3}
+  - {fileID: 8300000, guid: d49c9be96c53e3b43a1b14b3335e727f, type: 3}

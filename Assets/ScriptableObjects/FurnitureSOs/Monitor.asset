@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419a2333e8777e540b6806fcac688cb9, type: 3}
+  m_Name: Monitor
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8789589666194776961, guid: dd6392dd093fd71469f098865543dc3e, type: 3}
+  hitPoints: 1
+  scoreValue: 400
+  images: []
+  sounds:
+  - {fileID: 8300000, guid: 82fe348358f830f458a0e4f122ceb4a6, type: 3}
+  - {fileID: 8300000, guid: 4965776d5630df24787d0a4b23f3d073, type: 3}
+  - {fileID: 8300000, guid: b85545dad42104b44890f55b8deb1fc6, type: 3}
