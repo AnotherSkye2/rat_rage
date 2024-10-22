@@ -10,6 +10,7 @@ public class GameTimer : MonoBehaviour {
 
 	private TMP_Text Text;
 	private float timerDuration;
+	private int timerTextPaddingZeroesLength = 2;
 
 
 	private void Awake() {
@@ -18,7 +19,14 @@ public class GameTimer : MonoBehaviour {
 
 	private void Update() {
 		timerDuration = gameController.GetGameTimeRemaining();
-		Text.text = ((int)timerDuration).ToString();
+		//Debug.Log(timerDuration);
+		string seconds = ((int)(timerDuration % 60)).ToString();
+		if (timerDuration >= 60) {
+			string minutes = ((int)(timerDuration / 60)).ToString();
+			Text.text = minutes + ":" + new string('0', timerTextPaddingZeroesLength - seconds.Length) + seconds;
+		} else {
+			Text.text = ((int)(timerDuration)).ToString();
+		}
 	}
 
 }

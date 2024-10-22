@@ -10,14 +10,11 @@ public class Blink : MonoBehaviour
     void Start()
     {
 
-        InvokeRepeating("ChangeStateOfGameObject",1f,1f);
+        
 
     }
 
-    void ChangeStateOfGameObject()
-    {
-        targetObject.SetActive(!targetObject.activeInHierarchy);
-    }
+
 
     // Update is called once per frame
     void Update()

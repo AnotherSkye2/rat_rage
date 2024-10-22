@@ -11,7 +11,5 @@ public interface IHasAnimatedUI {
 		public List<AnimatedUIElement> uIElements;
 	}
 
-	public void AnimateUI(List<AnimatedUIElement> animatedUIElements) {
-		
-	}
+
 }

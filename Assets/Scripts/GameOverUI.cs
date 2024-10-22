@@ -8,13 +8,12 @@ using System;
 using UnityEngine.Video;
 using System.Linq;
 
-public class GameOverUI : AnimatedUI, IHasAnimatedUI, IHasVideo {
+public class GameOverUI : AnimatedUI, IHasVideo {
 
 	private const string VIDEO_SCREEN = "VideoScreen";
 	private const string SCORE_DISPLAY = "ScoreDisplay";
 	private const string GAME_OVER_BUTTONS = "GameOverButtons";
 
-	public event EventHandler<IHasAnimatedUI.OnAnimationTriggerEventArgs> OnAnimationTrigger;
 
 	public event EventHandler OnPlay;
 
@@ -53,14 +52,6 @@ public class GameOverUI : AnimatedUI, IHasAnimatedUI, IHasVideo {
 	//	throw new NotImplementedException();
 	//}
 
-
-	private void AnimateUI(List<AnimatedUIElement> animatedUIElements) {
-		Debug.Log("AnimateUI!");
-		Debug.Log(animatedUIElements[0]);
-		OnAnimationTrigger?.Invoke(this, new IHasAnimatedUI.OnAnimationTriggerEventArgs {
-			uIElements = animatedUIElements
-		});
-	}
 
 
 }

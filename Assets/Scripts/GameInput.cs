@@ -7,25 +7,25 @@ public class GameInput : MonoBehaviour
 {
 	public event EventHandler OnPunch;
 	public event EventHandler OnAnyKeyPressed;
-	public event EventHandler<OnRebindEventArgs> OnRebind;
-	public class OnRebindEventArgs : EventArgs {
-		public char key;
-	}
+
 
 	[SerializeField] private float minimumRebindTimerRange, maximumRebindTimerRange;
+	[SerializeField] private GameController gameController;
 
 	private KeyCode hitButton;
 	private PlayerInputActions playerInputActions;
-	private FunctionLooper rebindLooper;
 
 	private void Awake() {
-		rebindLooper = new FunctionLooper(Rebind, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
-
+		gameController.OnRebind += GameController_OnRebind ;
 		playerInputActions = new PlayerInputActions();
 		playerInputActions.Player.Enable();
-
 		hitButton = KeyCode.RightControl;
 	}
+
+	private void GameController_OnRebind(object sender, GameController.OnRebindEventArgs e) {
+		hitButton = (KeyCode)e.key;
+	}
+
 
 	private void Update() {
 		if (Input.GetKeyDown(hitButton)) {
@@ -34,21 +34,8 @@ public class GameInput : MonoBehaviour
 		if (Input.anyKey) {
 			OnAnyKeyPressed?.Invoke(this, EventArgs.Empty);
 		}
-		rebindLooper.Update();
 	}
 
-	private void Rebind() {
-		char previousKey = (char)hitButton;
-		char key = (char)(UnityEngine.Random.Range(0, 25) + 97);
-		if (key != 'w' && key != 'a' && key != 's' && key != 'd' && key != previousKey) {
-			hitButton = (KeyCode)key;
-			OnRebind?.Invoke(this, new OnRebindEventArgs {
-				key = key
-			});
-		} else {
-			Rebind();
-		}
-	}
 
 
 	public Vector2 GetMovementVectorNormalized() {

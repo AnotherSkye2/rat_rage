@@ -7,12 +7,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
-public class GameStartUI : AnimatedUI, IHasVideo, IHasAnimatedUI {
+public class GameStartUI : AnimatedUI, IHasVideo {
 
 	private const string VIDEO_SCREEN = "VideoScreen";
 	private const string START_UI_CANVAS = "StartUICanvas";
 
-	public event EventHandler<IHasAnimatedUI.OnAnimationTriggerEventArgs> OnAnimationTrigger;
 
 	public event EventHandler OnPlay;
 
@@ -20,6 +19,7 @@ public class GameStartUI : AnimatedUI, IHasVideo, IHasAnimatedUI {
 	[SerializeField] private VideoManager videoManager;
 	[SerializeField] private Canvas canvas;
 	[SerializeField] private Button startButton;
+	[SerializeField] private GameObject startButtonImageWithStroke;
 	[SerializeField] private Button quitButton;
 
 	private AnimatedUIElement videoScreen;
@@ -31,7 +31,6 @@ public class GameStartUI : AnimatedUI, IHasVideo, IHasAnimatedUI {
 			Debug.Log("start!");
 			SoundManager.PlaySound(SoundManager.Sound.UIClick);
 			AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(START_UI_CANVAS) });
-
 		});
 		quitButton.onClick.AddListener(() => {
 			Application.Quit();
@@ -39,6 +38,7 @@ public class GameStartUI : AnimatedUI, IHasVideo, IHasAnimatedUI {
 	}
 
 	private void Start() {
+		InvokeRepeating("Blink", 1f, 1f);
 	}
 
 	private void VideoManager_OnVideoFinished(object sender, EventArgs e) {
@@ -52,11 +52,10 @@ public class GameStartUI : AnimatedUI, IHasVideo, IHasAnimatedUI {
 		}
 	}
 
-	private void AnimateUI(List<AnimatedUIElement> animatedUIElements) {
-		Debug.Log("AnimateUI!");
-		OnAnimationTrigger?.Invoke(this, new IHasAnimatedUI.OnAnimationTriggerEventArgs {
-			uIElements = animatedUIElements
-		});
+	private void Blink() {
+		startButtonImageWithStroke.SetActive(!startButtonImageWithStroke.activeInHierarchy);
 	}
+
+
 
 }
