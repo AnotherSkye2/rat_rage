@@ -41,7 +41,9 @@ public class GameController : MonoBehaviour {
 		state = State.WaitingForStart;
 		player.OnFurnitureDestroyed += Player_OnFurnitureDestroyed;
 		gameInput.OnAnyKeyPressed += GameInput_OnAnyKeyPressed;
+		gameInput.OnWrongKeyPressed += GameInput_OnWrongKeyPressed;
 	}
+
 
 	private void Start() {
 		rebindLooper = new FunctionLooper(Rebind, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
@@ -60,6 +62,9 @@ public class GameController : MonoBehaviour {
 			OnGameStart?.Invoke(this, EventArgs.Empty);
 			gameTimer = FunctionTimer.Create(EndGame, gameDuration);
 		}
+	}
+	private void GameInput_OnWrongKeyPressed(object sender, EventArgs e) {
+		SoundManager.PlaySound(SoundManager.Sound.WrongHitButtonPress);
 	}
 
 	private void Update() {

@@ -26,17 +26,11 @@ public class FurnitureObject : MonoBehaviour {
 				coll.enabled = false;
 			}
 			furnitureDestruction.ChangeImage(hp-currentHp);
-			PlaySound();
+			SoundManager.PlaySound(gameObject.tag);
 		}
 	}
 
-	public virtual void PlaySound() {
-		AudioClip[] sfxS = furnitureObjectSO.sounds;
-		audioSource = GetComponent<AudioSource>();
-		audioSource.clip = sfxS[UnityEngine.Random.Range(0, 3)];
-		//Debug.Log(audioSource.clip);
-		audioSource.Play();
-	}
+
 
 
 

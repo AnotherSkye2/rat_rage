@@ -9,28 +9,83 @@ public static class SoundManager {
 
 	public enum Sound {
 		Music,
+		UIOver,
 		UIClick,
 		PlayerMove,
-		FurnitureHit,
+		Tool,
+		Sahtlid,
+		Printer,
+		Metallkapp,
+		Laud,
 		HitButtonChange,
 		WrongHitButtonPress,
 		Timer,
 	}
 
 	private static Dictionary<Sound, float> soundTimerDictionary;
+	private static Dictionary<string, Sound> furnitureTagSoundDictionary;
+	private static GameObject oneShotGameObject;
+	private static AudioSource oneShoutAudioSource;
+
 
 	public static void Initialize() {
 		soundTimerDictionary = new Dictionary<Sound, float>();
 		soundTimerDictionary[Sound.PlayerMove] = 0;
+
+		furnitureTagSoundDictionary = new Dictionary<string, Sound>();
+		furnitureTagSoundDictionary["Tool"] = Sound.Tool;
+		furnitureTagSoundDictionary["Sahtlid"] = Sound.Sahtlid;
+		furnitureTagSoundDictionary["Printer"] = Sound.Printer;
+		furnitureTagSoundDictionary["Metallkapp"] = Sound.Metallkapp;
+		furnitureTagSoundDictionary["Laud"] = Sound.Laud;
 	}
+
+	public static void PlaySound(Sound sound, Vector3 position) {
+		if (CanPlaySound(sound)) {
+			GameObject soundGameObject = new GameObject("Sound");
+			soundGameObject.transform.position = position;
+			AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+			audioSource.clip = GetAudioClip(sound);
+			audioSource.maxDistance = 100f;
+			audioSource.spatialBlend = 1f;
+			audioSource.rolloffMode = AudioRolloffMode.Linear;
+			audioSource.dopplerLevel = 0f;
+			audioSource.Play();
+
+			Object.Destroy(soundGameObject, audioSource.clip.length);
+		}
+
+	}
+
+
 
 	public static void PlaySound(Sound sound) {
 		if (CanPlaySound(sound)) {
-			GameObject soundGameObject = new GameObject("Sound");
-			AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-			audioSource.PlayOneShot(GetAudioClip(sound));
+			if (oneShotGameObject == null) {
+				oneShotGameObject = new GameObject("Sound");
+				oneShoutAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+
+			}
+			AudioClip audioClip = GetAudioClip(sound);
+			Debug.Log(audioClip);
+			oneShoutAudioSource.PlayOneShot(audioClip);
 		}
 	}
+
+	public static void PlaySound(string furnitureTag) {
+		Sound sound = furnitureTagSoundDictionary[furnitureTag];
+		if (CanPlaySound(sound)) {
+			if (oneShotGameObject == null) {
+				oneShotGameObject = new GameObject("Sound");
+				oneShoutAudioSource = oneShotGameObject.AddComponent<AudioSource>();
+
+			}
+			AudioClip audioClip = GetAudioClip(sound);
+			Debug.Log(audioClip);
+			oneShoutAudioSource.PlayOneShot(audioClip);
+		}
+	}
+
 
 	private static bool CanPlaySound(Sound sound) {
 		switch (sound) {
@@ -56,7 +111,7 @@ public static class SoundManager {
 	private static AudioClip GetAudioClip(Sound sound) {
 		foreach (GameAssets.SoundAudioClip soundAudioClip in GameAssets.i.soundAudioClip) {
 			if (soundAudioClip.sound == sound) {
-				return soundAudioClip.audioClip;
+				return soundAudioClip.audioClips[Random.Range(0, soundAudioClip.audioClips.Length) ];
 			}
 		}
 		Debug.LogError("Sound" + sound + "not found!");

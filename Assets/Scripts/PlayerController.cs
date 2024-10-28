@@ -103,8 +103,9 @@ public class PlayerController : MonoBehaviour {
 		}		
 
 		isWalking = moveDir != Vector3.zero;
+
 		if (isWalking) {
-			SoundManager.PlaySound(SoundManager.Sound.PlayerMove);
+			SoundManager.PlaySound(SoundManager.Sound.PlayerMove, transform.position);
 		}
 		//Debug.Log(moveDir);
 

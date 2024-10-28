@@ -49,6 +49,7 @@ public class GameUI : AnimatedUI {
 	}
 
 	private void GameController_OnGameStart(object sender, EventArgs e) {
+		SoundManager.PlaySound(SoundManager.Sound.UIClick);
 		AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(TUTORIAL_OVERLAY) });
 	}
 

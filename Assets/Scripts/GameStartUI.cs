@@ -27,15 +27,22 @@ public class GameStartUI : AnimatedUI, IHasVideo {
 	private void Awake() {
 		GetUIAnimator().OnAnimationFinished += UIAnimator_OnAnimationFinished;
 		videoManager.OnVideoFinished += VideoManager_OnVideoFinished;
-		startButton.onClick.AddListener(() => {
-			Debug.Log("start!");
-			SoundManager.PlaySound(SoundManager.Sound.UIClick);
-			AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(START_UI_CANVAS) });
-		});
-		quitButton.onClick.AddListener(() => {
-			Application.Quit();
-		});
+
+		ButtonUI startButtonUI = startButton.gameObject.GetComponent<ButtonUI>();
+		startButtonUI.OnAudioClipFinished += StartButtonUI_OnAudioClipFinished;
+
+		ButtonUI quitButtonUI = quitButton.gameObject.GetComponent<ButtonUI>();
+		quitButtonUI.OnAudioClipFinished += QuitButtonUI_OnAudioClipFinished;
+
 	}
+
+	private void StartButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
+		AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(START_UI_CANVAS) });
+	}
+	private void QuitButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
+		Application.Quit();
+	}
+
 
 	private void Start() {
 		InvokeRepeating("Blink", 1f, 1f);

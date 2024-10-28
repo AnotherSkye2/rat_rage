@@ -19,7 +19,7 @@ public class MonitorFurnitureObject : FurnitureObject {
 			Collider coll = gameObject.GetComponent<Collider>();
 			coll.enabled = false;
 			animator.SetBool(BROKEN, true);
-			PlaySound();
+			SoundManager.PlaySound(gameObject.tag);
 		}
 	}
 

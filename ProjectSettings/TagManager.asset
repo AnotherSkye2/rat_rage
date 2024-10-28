@@ -6,6 +6,11 @@ TagManager:
   tags:
   - enemy
   - player
+  - Tool
+  - Sahtlid
+  - Printer
+  - Metallkapp
+  - Laud
   layers:
   - Default
   - TransparentFX

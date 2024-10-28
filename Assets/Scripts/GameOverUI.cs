@@ -24,14 +24,9 @@ public class GameOverUI : AnimatedUI, IHasVideo {
 	private void Awake() {
 		videoManager.OnVideoFinished += VideoManager_OnVideoFinished;
 		videoManager.OnVideoStarted += VideoManager_OnVideoStarted;
-		quitButton.onClick.AddListener(() => {
-			Debug.Log("Quit!");
-			Application.Quit();
-		});
-		againButton.onClick.AddListener(() => {
-			SceneLoader.Load(SceneLoader.Scene.Destruction);
-		});
+
 	}
+
 
 	private void VideoManager_OnVideoStarted(object sender, EventArgs e) {
 		AnimateUI(new List<AnimatedUIElement>  {GetUIElementByName(VIDEO_SCREEN)} );
@@ -39,7 +34,23 @@ public class GameOverUI : AnimatedUI, IHasVideo {
 
 	private void Start() {
 		OnPlay?.Invoke(this, EventArgs.Empty);
-		Debug.Log("OnPlay");
+		//Debug.Log("OnPlay");
+		ButtonUI quitButtonUI = quitButton.gameObject.GetComponent<ButtonUI>();
+		quitButtonUI.OnAudioClipFinished += QuitButtonUI_OnAudioClipFinished;
+		
+		ButtonUI againButtonUI = againButton.gameObject.GetComponent<ButtonUI>();
+		againButtonUI.OnAudioClipFinished += AgainButtonUI_OnAudioClipFinished;
+
+	}
+
+	private void AgainButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
+		SceneLoader.Load(SceneLoader.Scene.Destruction);
+
+	}
+
+	private void QuitButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
+		Debug.Log("Quit!");
+		Application.Quit();
 	}
 
 	private void VideoManager_OnVideoFinished(object sender, EventArgs e) {
