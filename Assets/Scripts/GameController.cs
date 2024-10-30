@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
 	private void Start() {
 		rebindLooper = new FunctionLooper(Rebind, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
 		SoundManager.Initialize();
-		SoundManager.PlaySound(SoundManager.Sound.Music);
+		SoundManager.LoopSound(SoundManager.Sound.Music);
 	}
 
 	private void Player_OnFurnitureDestroyed(object sender, PlayerController.OnFurnitureDestroyedEventArgs e) {

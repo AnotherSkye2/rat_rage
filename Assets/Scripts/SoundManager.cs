@@ -71,6 +71,13 @@ public static class SoundManager {
 			oneShoutAudioSource.PlayOneShot(audioClip);
 		}
 	}
+	public static void LoopSound(Sound sound) {
+		GameObject loopGameObject = new GameObject(sound.ToString());
+		AudioSource loopAudioSource = loopGameObject.AddComponent<AudioSource>();
+		loopAudioSource.clip = GetAudioClip(sound);
+		loopAudioSource.loop = true;
+		loopAudioSource.Play();
+	}
 
 	public static void PlaySound(string furnitureTag) {
 		Sound sound = furnitureTagSoundDictionary[furnitureTag];
