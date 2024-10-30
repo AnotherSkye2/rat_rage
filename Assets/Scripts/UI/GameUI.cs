@@ -6,6 +6,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Linq;
 using static GameController;
+using UnityEngine.UI;
 
 public class GameUI : AnimatedUI {
 
@@ -16,6 +17,7 @@ public class GameUI : AnimatedUI {
 
 	[SerializeField] private GameInput gameInput;
 	[SerializeField] private GameObject currentHitButton;
+	[SerializeField] private Sprite currentHitButtonSmallButtonBackgroundSprite;
 	[SerializeField] private GameController gameController;
 
 	private string previousKey;
@@ -42,6 +44,9 @@ public class GameUI : AnimatedUI {
 		Debug.Log("GameInput_OnRebind");
 		string currentKey = Char.ToString(e.key).ToUpper();
 		currentHitButtonText.text = currentKey;
+		Transform currentHitButtonBackground = currentHitButton.transform.Find("CurrentHitButtonTextBackground");
+		currentHitButtonBackground.gameObject.GetComponent<Image>().sprite = currentHitButtonSmallButtonBackgroundSprite;
+		currentHitButtonBackground.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
 		hitButtonChangeText.text = previousKey + " > " + currentKey;
 		previousKey = currentKey;
 		hitButtonChange.GetComponent<CanvasGroup>().alpha = 1f;
