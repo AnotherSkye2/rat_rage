@@ -43,10 +43,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	IEnumerator ColliderTrigger(float time) {
-		Debug.Log("EnableCollider");
+		//Debug.Log("EnableCollider");
 		EnableCollider();
 		yield return new WaitForSeconds(time);
-		Debug.Log("DisableCollider");
+		//Debug.Log("DisableCollider");
 		DisableCollider();
 	}
 

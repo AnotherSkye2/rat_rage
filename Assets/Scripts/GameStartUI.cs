@@ -22,7 +22,6 @@ public class GameStartUI : AnimatedUI, IHasVideo {
 	[SerializeField] private GameObject startButtonImageWithStroke;
 	[SerializeField] private Button quitButton;
 
-	private AnimatedUIElement videoScreen;
 
 	private void Awake() {
 		GetUIAnimator().OnAnimationFinished += UIAnimator_OnAnimationFinished;

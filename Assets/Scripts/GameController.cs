@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour {
 		public char key;
 	}
 
-	private enum State {
+	public enum State {
 		WaitingForStart,
 		Playing,
 		Paused,
@@ -98,6 +98,10 @@ public class GameController : MonoBehaviour {
 
 	public int GetScore() {
 		return score;
+	}
+	
+	public State GetState() {
+		return state;
 	}
 
 	public float GetGameTimeRemaining() {
