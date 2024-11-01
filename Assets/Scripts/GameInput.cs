@@ -63,7 +63,7 @@ public class GameInput : MonoBehaviour
 
 	private void OnButtonPressed(InputControl button) {
 		//Checking if the current button pressed is WASD, hitbutton and R.Ctrl
-		Debug.Log(gameController.GetState());
+		//Debug.Log(gameController.GetState());
 		if (button.name != "w" && button.name != "a" && button.name != "s" && button.name != "d" && button.name != hitButton.ToString().ToLower() && (button.name != "rightCtrl" || hitButton != KeyCode.RightControl)) {
 			OnWrongKeyPressed?.Invoke(this, EventArgs.Empty);
 		}

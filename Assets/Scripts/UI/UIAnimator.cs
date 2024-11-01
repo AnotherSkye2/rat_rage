@@ -16,8 +16,9 @@ public class UIAnimator : MonoBehaviour {
 	[SerializeField] private GameObject hasAnimatedUIGameObject;
 
 	private const string MOVE = "Move"; 
-	//private const string MOVE_SINGLE_AXIS = "MoveSingleAxis"; 
+	private const string MOVE_FROM = "MoveFrom"; 
 	private const string FADE = "Fade";
+	private const string FADE_FROM = "FadeFrom";
 
 	private Sequence sequence;
 	private IHasAnimatedUI hasAnimatedUI;
@@ -64,11 +65,14 @@ public class UIAnimator : MonoBehaviour {
 					case MOVE:
 						tween = MoveUI(new Vector2(animatedUIElementSO.toMovePosX,animatedUIElementSO.toMovePosY), animatedUIElementSO.tweenDuration);
 						break;
-					//case MOVE_SINGLE_AXIS:
-					//	MoveUISingleAxis(sequence);
-					//	break;
+					case MOVE_FROM:
+						tween = MoveUIFrom(new Vector2(animatedUIElementSO.toMovePosX,animatedUIElementSO.toMovePosY), animatedUIElementSO.tweenDuration);
+						break;
 					case FADE:
 						tween = FadeUI(animatedUIElement, animatedUIElementSO.fadeAlpha, animatedUIElementSO.tweenDuration);
+						break;
+					case FADE_FROM:
+						tween = FadeUIFrom(animatedUIElement, animatedUIElementSO.fadeAlpha, animatedUIElementSO.tweenDuration);
 						break;
 					default:
 						Debug.LogError("The name of \"UI Animation\" must be formatted correctly. The available animations are: Move,Fade");
@@ -88,6 +92,12 @@ public class UIAnimator : MonoBehaviour {
 		return moveTween;
 		
 	}
+	private Tween MoveUIFrom(Vector2 moveVector, float tweenDuration) {
+		Tween moveTween = animatedUIElementTransform.DOAnchorPos(moveVector, tweenDuration).From();
+		moveTween.stringId = MOVE_FROM;
+		return moveTween;
+		
+	}
 
 	//private Tween MoveUISingleAxis(Sequence sequence) {
 	//	if (animatedUIElementTransform.anchoredPosition.y != animatedUIElementSO.toMovePosY) {
@@ -102,6 +112,12 @@ public class UIAnimator : MonoBehaviour {
 		CanvasGroup canvasGroup = animatedUIElement.GetComponent<CanvasGroup>();
 		Tween fadeTween = canvasGroup.DOFade(fadealpha,tweenDuration);
 		fadeTween.stringId = FADE;
+		return fadeTween;
+	}
+	private Tween FadeUIFrom(AnimatedUIElement animatedUIElement, float fadealpha, float tweenDuration) {
+		CanvasGroup canvasGroup = animatedUIElement.GetComponent<CanvasGroup>();
+		Tween fadeTween = canvasGroup.DOFade(fadealpha,tweenDuration).From();
+		fadeTween.stringId = FADE_FROM;
 		return fadeTween;
 	}
 
