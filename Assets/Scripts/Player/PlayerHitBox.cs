@@ -12,15 +12,20 @@ public class PlayerHitBox : MonoBehaviour
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == "enemy") {
-			Debug.Log(other.gameObject);
-			Debug.Log("OnTriggerEnter");
+		if (CheckColliderTag(other.gameObject.tag)) {
+			//Debug.Log(other.gameObject);
+			//Debug.Log("OnTriggerEnter");
 			OnHitboxHit?.Invoke(this, new OnHitboxHitEventArgs { 
 				furnitureObject = other.gameObject.GetComponent<FurnitureObject>()
 			});
 		}
 	}
 
-
+	private bool CheckColliderTag(string tag) {
+		if (tag == "Laud" || tag == "Metallkapp" || tag == "Printer" || tag == "Sahtlid" || tag == "Tool" ) {
+			return true;
+		}
+		return false;
+	}
 
 }

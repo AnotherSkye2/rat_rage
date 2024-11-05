@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void PlayerHitBox_OnHitboxHit(object sender, PlayerHitBox.OnHitboxHitEventArgs e) {
-		Debug.Log(e.furnitureObject);
-		Debug.Log("OnHitboxHit");
+		//Debug.Log(e.furnitureObject);
+		//Debug.Log("OnHitboxHit");
 		if (e.furnitureObject.GetCurrentHp() <= 1) {
-			Debug.Log("0hp!");
+			//Debug.Log("0hp!");
 			FurnitureObjectSO furnitureObjectSO = e.furnitureObject.GetFurnitureObjectSO();
 			OnFurnitureDestroyed?.Invoke(this, new OnFurnitureDestroyedEventArgs {
 				scoreValue = furnitureObjectSO.scoreValue

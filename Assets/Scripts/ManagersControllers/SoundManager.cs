@@ -67,7 +67,7 @@ public static class SoundManager {
 
 			}
 			AudioClip audioClip = GetAudioClip(sound);
-			Debug.Log(audioClip);
+			//Debug.Log(audioClip);
 			oneShoutAudioSource.PlayOneShot(audioClip);
 		}
 	}
@@ -88,7 +88,7 @@ public static class SoundManager {
 
 			}
 			AudioClip audioClip = GetAudioClip(sound);
-			Debug.Log(audioClip);
+			//Debug.Log(audioClip);
 			oneShoutAudioSource.PlayOneShot(audioClip);
 		}
 	}

@@ -11,6 +11,7 @@ public class GameTimer : MonoBehaviour {
 	private TMP_Text Text;
 	private float timerDuration;
 	private int timerTextPaddingZeroesLength = 2;
+	private int numOfRoundedDecimals = 2;
 
 
 	private void Awake() {
@@ -19,13 +20,25 @@ public class GameTimer : MonoBehaviour {
 
 	private void Update() {
 		timerDuration = gameController.GetGameTimeRemaining();
-		//Debug.Log(timerDuration);
+		Debug.Log(timerDuration);
 		string seconds = ((int)(timerDuration % 60)).ToString();
-		if (timerDuration >= 60) {
-			string minutes = ((int)(timerDuration / 60)).ToString();
-			Text.text = minutes + ":" + new string('0', timerTextPaddingZeroesLength - seconds.Length) + seconds;
-		} else {
-			Text.text = ((int)(timerDuration)).ToString();
+		switch (timerDuration) {
+			case < 1f:
+				Debug.Log(Mathf.Pow(10, numOfRoundedDecimals));
+				Text.text = ((Mathf.Round(timerDuration * (int)Mathf.Pow(10, numOfRoundedDecimals))) / Mathf.Pow(10, numOfRoundedDecimals)).ToString();
+				break;
+			case < 10f:
+				GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1f);
+				Text.color = Color.red;
+				Text.text = seconds;
+				break;
+			case < 60f:
+				Text.text = seconds;
+				break;
+			default:
+				string minutes = ((int)(timerDuration / 60)).ToString();
+				Text.text = minutes + ":" + new string('0', timerTextPaddingZeroesLength - seconds.Length) + seconds;
+				break;
 		}
 	}
 
