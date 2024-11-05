@@ -5822,7 +5822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumRebindTimerRange: 99
   maximumRebindTimerRange: 99
-  gameDuration: 90
+  gameDuration: 3
   gameInput: {fileID: 1358890335}
   scoreManager: {fileID: 1348327727}
   player: {fileID: 679211769}
