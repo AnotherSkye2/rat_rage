@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7544708951466713517}
   - component: {fileID: 8408507066611717534}
   - component: {fileID: 9172518513319227878}
+  - component: {fileID: 8059626067579814957}
   m_Layer: 0
   m_Name: File_Cabinet_Flipped
   m_TagString: Metallkapp
@@ -121,6 +122,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureObjectSO: {fileID: 11400000, guid: 833403cf499a0b94ab40d5e925d09369, type: 2}
   furnitureDestruction: {fileID: 5841977645156017356}
+--- !u!54 &8059626067579814957
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766853726926978043}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3214758029826234654
 GameObject:
   m_ObjectHideFlags: 0

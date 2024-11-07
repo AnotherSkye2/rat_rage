@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7961122371929216591}
   - component: {fileID: 8757838807591054631}
   - component: {fileID: -1562644960707043126}
+  - component: {fileID: 6074571786865592628}
   m_Layer: 0
   m_Name: Laud_Paberitega_Flipped
   m_TagString: Laud
@@ -205,6 +206,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureObjectSO: {fileID: 11400000, guid: 711105f53e446594988adf139483b7b2, type: 2}
   furnitureDestruction: {fileID: -6168992549193423715}
+--- !u!54 &6074571786865592628
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405562874827108306}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2658766503000330033
 GameObject:
   m_ObjectHideFlags: 0

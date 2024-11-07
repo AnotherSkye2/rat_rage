@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 77311318651406498}
   - component: {fileID: 895834447382166224}
   - component: {fileID: 4365443642963248076}
+  - component: {fileID: -4662591395718685213}
   m_Layer: 0
   m_Name: Laud_Paberitega
   m_TagString: Laud
@@ -121,6 +122,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureObjectSO: {fileID: 11400000, guid: 711105f53e446594988adf139483b7b2, type: 2}
   furnitureDestruction: {fileID: 5806753605210219555}
+--- !u!54 &-4662591395718685213
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4304463965428732052}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7507575776285464258
 GameObject:
   m_ObjectHideFlags: 0
