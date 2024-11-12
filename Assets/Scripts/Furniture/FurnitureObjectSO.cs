@@ -10,6 +10,5 @@ public class FurnitureObjectSO : ScriptableObject {
 	public int hitPoints;
 	public int scoreValue;
 	public Sprite[] images;
-	public AudioClip[] sounds;
 
 }

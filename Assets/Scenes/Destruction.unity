@@ -5920,8 +5920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb26a37c0b3fcb4f94092d308522e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumRebindTimerRange: 999
-  maximumRebindTimerRange: 999
+  minimumRebindTimerRange: 5
+  maximumRebindTimerRange: 12
   gameTime: 999
   scoreManager: {fileID: 1348327727}
   gameUI: {fileID: 1740563631}

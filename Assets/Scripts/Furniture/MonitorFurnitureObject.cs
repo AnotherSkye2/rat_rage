@@ -7,7 +7,6 @@ public class MonitorFurnitureObject : FurnitureObject {
 
 	private const string BROKEN = "Broken";
 
-
 	private Animator animator;
 
 	private void Awake() {

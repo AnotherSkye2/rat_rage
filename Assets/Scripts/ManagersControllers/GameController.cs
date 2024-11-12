@@ -38,8 +38,7 @@ public class GameController : MonoBehaviour {
 
 
 	private KeyCode hitButton;
-	private FunctionLooper rebindLooper;
-	private FunctionTimer gameFunctionTimer;
+	private FunctionTimer gameFunctionTimer, rebindTimer;
 	private int score;
 	private State state;
 	private State stateBeforePause;
@@ -72,13 +71,11 @@ public class GameController : MonoBehaviour {
 		GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
 		state = State.WaitingForStart;
 		stateBeforePause = state;
-		rebindLooper = new FunctionLooper(Rebind, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
 		SoundManager.Initialize();
 		SoundManager.LoopSound(SoundManager.Sound.Music);
 	}
 	private void Update() {
 		scoreManager.SetScore(score);
-		rebindLooper.Update();
 	}
 
 	private void GameInput_OnPauseAction(object sender, EventArgs e) {
@@ -98,6 +95,7 @@ public class GameController : MonoBehaviour {
 			state = State.Playing;
 			OnGameStart?.Invoke(this, EventArgs.Empty);
 			gameFunctionTimer = FunctionTimer.Create(EndGame, gameTime);
+			rebindTimer = FunctionTimer.Create(RebindTimer, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
 		}
 	}
 	private void GameInput_OnWrongKeyPressed(object sender, EventArgs e) {
@@ -119,6 +117,11 @@ public class GameController : MonoBehaviour {
 		else {
 			Rebind();
 		}
+	}
+
+	private void RebindTimer() {
+		Rebind();
+		rebindTimer = FunctionTimer.Create(RebindTimer, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
 	}
 
 
