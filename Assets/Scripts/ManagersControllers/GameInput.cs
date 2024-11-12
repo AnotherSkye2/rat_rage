@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using System.Diagnostics.Tracing;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -18,26 +16,38 @@ public class GameInput : MonoBehaviour {
 	public event EventHandler OnPauseAction;
 
 
-	[SerializeField] private float minimumRebindTimerRange, maximumRebindTimerRange;
 	[SerializeField] private GameController gameController;
 
 	private KeyCode hitButton;
+	private int pauseCounter;
 	private PlayerInputActions playerInputActions;
 
 	private void Awake() {
 		Instance = this;
-		gameController.OnRebind += GameController_OnRebind ;
 		playerInputActions = new PlayerInputActions();
 		playerInputActions.Player.Enable();
 		playerInputActions.Player.Pause.performed += Pause_performed;
-		hitButton = KeyCode.RightControl;
+		gameController.OnRebind += GameController_OnRebind;
+		gameController.OnGameEnd += GameController_OnGameEnd;
 	}
 
 	private void Pause_performed(InputAction.CallbackContext obj) {
+		pauseCounter++;
+		Debug.Log("pauseCounter: "+pauseCounter);
 		OnPauseAction?.Invoke(this, EventArgs.Empty); 
+	}
+	private void GameController_OnRebind(object sender, GameController.OnRebindEventArgs e) {
+		hitButton = (KeyCode)e.key;
+	}
+	private void GameController_OnGameEnd(object sender, EventArgs e) {
+		playerInputActions.Player.Pause.performed -= Pause_performed;
+		gameController.OnRebind -= GameController_OnRebind;
+		gameController.OnGameEnd -= GameController_OnGameEnd;
 	}
 
 	private void Start() {
+		hitButton = KeyCode.RightControl;
+
 		InputSystem.onEvent
 			.ForDevice<Keyboard>()
 			.Where(e => {
@@ -55,9 +65,6 @@ public class GameInput : MonoBehaviour {
 	}
 
 
-	private void GameController_OnRebind(object sender, GameController.OnRebindEventArgs e) {
-		hitButton = (KeyCode)e.key;
-	}
 
 	private void OnButtonPressed(InputControl button) {
 		//Debug.Log(button.name);

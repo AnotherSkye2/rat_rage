@@ -5901,11 +5901,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1791510368}
-  - {fileID: 1358890336}
   - {fileID: 1348327728}
   - {fileID: 1740563632}
   - {fileID: 786306337}
   - {fileID: 1312945862}
+  - {fileID: 1358890336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &484924129
@@ -5920,10 +5920,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb26a37c0b3fcb4f94092d308522e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumRebindTimerRange: 5
-  maximumRebindTimerRange: 12
-  gameTime: 90
+  minimumRebindTimerRange: 999
+  maximumRebindTimerRange: 999
+  gameTime: 999
   scoreManager: {fileID: 1348327727}
+  gameUI: {fileID: 1740563631}
   player: {fileID: 679211769}
   destroyedMaterial: {fileID: 2100000, guid: 3f1b466dd22b54440871f135480371a0, type: 2}
 --- !u!213 &489376125
@@ -13713,8 +13714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9ce7094bd503c419102068ab54b0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumRebindTimerRange: 5
-  maximumRebindTimerRange: 12
   gameController: {fileID: 484924129}
 --- !u!4 &1358890336
 Transform:
@@ -42746,8 +42745,8 @@ MonoBehaviour:
   gameController: {fileID: 484924129}
   player: {fileID: 679211769}
   currentHitButton: {fileID: 356494964}
-  restartButton: {fileID: 939435521}
-  mainmenuButton: {fileID: 1347516522}
+  restartButtonUI: {fileID: 939435524}
+  mainmMenuButtonUI: {fileID: 1347516525}
   gamePausedOverlay: {fileID: 244458040}
   scoreNotificationParent: {fileID: 618828776}
   currentHitButtonSmallButtonBackgroundSprite: {fileID: 21300000, guid: d5476f7e52268364daf7e25ae83c525f,

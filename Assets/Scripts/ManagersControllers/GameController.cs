@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private float minimumRebindTimerRange, maximumRebindTimerRange;
 	[SerializeField] private float gameTime;
 	[SerializeField] private ScoreManager scoreManager;
+	[SerializeField] private GameUI gameUI;
 	[SerializeField] private PlayerController player;
 	[SerializeField] public  Material destroyedMaterial;
 
@@ -44,17 +45,33 @@ public class GameController : MonoBehaviour {
 	private State stateBeforePause;
 
 	private void Awake() {
+		gameUI.OnPauseMenuButtonPressed += GameUI_OnPauseMenuButtonPressed;
 		player.OnFurnitureDestroyed += Player_OnFurnitureDestroyed;
 	}
 
 
-	private void Start() {
+	private void GameUI_OnPauseMenuButtonPressed(object sender, GameUI.OnPauseMenuButtonPressedEventArgs e) {
+		Time.timeScale = 1.0f;
+		OnGameEnd?.Invoke(this, EventArgs.Empty);
+		switch (e.buttonUIString) {
+			case "RestartButton":
+				SceneLoader.Load(SceneLoader.Scene.Destruction);
+				break;
+			case "MainMenuButton":
+				SceneLoader.Load(SceneLoader.Scene.Start);
+				break;
+			default:
+				break;
 
-		state = State.WaitingForStart;
-		stateBeforePause = state;
-		GameInput.Instance.OnAnyKeyPressed += GameInput_OnAnyKeyPressed;
+		}
+	}
+
+	private void Start() {
+		GameInput.Instance.OnAnyKeyPressed += GameInput_OnAnyKeyPressed; 
 		GameInput.Instance.OnWrongKeyPressed += GameInput_OnWrongKeyPressed;
 		GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
+		state = State.WaitingForStart;
+		stateBeforePause = state;
 		rebindLooper = new FunctionLooper(Rebind, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
 		SoundManager.Initialize();
 		SoundManager.LoopSound(SoundManager.Sound.Music);

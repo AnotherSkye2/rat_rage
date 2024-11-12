@@ -11,6 +11,12 @@ using UnityEngine.SceneManagement;
 
 public class GameUI : AnimatedUI {
 
+	public event EventHandler<OnPauseMenuButtonPressedEventArgs> OnPauseMenuButtonPressed;
+
+	public class OnPauseMenuButtonPressedEventArgs : EventArgs {
+		public string buttonUIString;
+	}
+
 	private const string HIT_BUTTON_CHANGE = "HitButtonChange";
 	private const string TUTORIAL_OVERLAY = "TutorialOverlay";
 	private const string SCORE_NOTIFICATION = "ScoreNotification";
@@ -22,8 +28,8 @@ public class GameUI : AnimatedUI {
 	[SerializeField] private GameController gameController;
 	[SerializeField] private PlayerController player;
 	[SerializeField] private GameObject currentHitButton;
-	[SerializeField] private Button restartButton;
-	[SerializeField] private Button mainmenuButton;
+	[SerializeField] private ButtonUI restartButtonUI;
+	[SerializeField] private ButtonUI mainmMenuButtonUI;
 	[SerializeField] private Transform gamePausedOverlay;
 	[SerializeField] private RectTransform scoreNotificationParent;
 	[SerializeField] private Sprite currentHitButtonSmallButtonBackgroundSprite;
@@ -40,16 +46,22 @@ public class GameUI : AnimatedUI {
 		player.OnFurnitureDestroyed += Player_OnFurnitureDestroyed;
 		gameController.OnGameStart += GameController_OnGameStart;
 		gameController.OnGamePaused += GameController_OnGamePaused;
+		gameController.OnGameEnd += GameController_OnGameEnd;
 		gameController.OnRebind += GameController_OnRebind;
 		GetUIAnimator().OnAnimationFinished += UIAnimator_OnAnimatorFinished;
-
-		ButtonUI mainmenuButtonUI = mainmenuButton.GetComponent<ButtonUI>();
-		Debug.Log(mainmenuButtonUI);
-		mainmenuButtonUI.OnAudioClipFinished += MainmenuButton_OnAudioClipFinished;
-
-		ButtonUI restartButtonUI = restartButton.GetComponent<ButtonUI>();
-		Debug.Log(restartButtonUI);
+		mainmMenuButtonUI.OnAudioClipFinished += MainmenuButton_OnAudioClipFinished;
 		restartButtonUI.OnAudioClipFinished += RestartButton_OnAudioClipFinished;
+	}
+
+	private void GameController_OnGameEnd(object sender, EventArgs e) {
+		player.OnFurnitureDestroyed -= Player_OnFurnitureDestroyed;
+		gameController.OnGameStart -= GameController_OnGameStart;
+		gameController.OnGamePaused -= GameController_OnGamePaused;
+		gameController.OnGameEnd -= GameController_OnGameEnd;
+		gameController.OnRebind -= GameController_OnRebind;
+		GetUIAnimator().OnAnimationFinished -= UIAnimator_OnAnimatorFinished;
+		mainmMenuButtonUI.OnAudioClipFinished -= MainmenuButton_OnAudioClipFinished;
+		restartButtonUI.OnAudioClipFinished -= RestartButton_OnAudioClipFinished;
 	}
 
 	private void GameController_OnGamePaused(object sender, OnGamePausedEventArgs e) {
@@ -83,13 +95,15 @@ public class GameUI : AnimatedUI {
 	}
 
 	private void RestartButton_OnAudioClipFinished(object sender, EventArgs e) {
-		Time.timeScale = 1.0f;
-		SceneLoader.Load(SceneLoader.Scene.Destruction);
+		OnPauseMenuButtonPressed?.Invoke(this, new OnPauseMenuButtonPressedEventArgs { 
+			buttonUIString = "RestartButton"
+		});
 	}
 
 	private void MainmenuButton_OnAudioClipFinished(object sender, EventArgs e) {
-		Time.timeScale = 1.0f;
-		SceneLoader.Load(SceneLoader.Scene.Start);
+		OnPauseMenuButtonPressed?.Invoke(this, new OnPauseMenuButtonPressedEventArgs {
+			buttonUIString = "MainMenuButton"
+		});
 	}
 
 	private void GameController_OnRebind(object sender, OnRebindEventArgs e) {
