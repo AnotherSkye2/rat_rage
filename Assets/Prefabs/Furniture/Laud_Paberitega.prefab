@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2c80f9aabfceb49979b8a7c86aa549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnitureObjectSO: {fileID: 11400000, guid: 711105f53e446594988adf139483b7b2, type: 2}
+  furnitureObjectSO: {fileID: 11400000, guid: e5b8766a09e099841bd0e702dc9d463f, type: 2}
   furnitureDestruction: {fileID: 5806753605210219555}
 --- !u!54 &-4662591395718685213
 Rigidbody:
@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccfcecedd1b23545a0f2228936e5796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useStaticBillboard: 1
 --- !u!114 &5806753605210219555
 MonoBehaviour:
   m_ObjectHideFlags: 0
