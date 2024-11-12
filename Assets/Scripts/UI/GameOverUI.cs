@@ -54,6 +54,8 @@ public class GameOverUI : AnimatedUI, IHasVideo {
 	}
 
 	private void VideoManager_OnVideoFinished(object sender, EventArgs e) {
+		videoManager.OnVideoFinished -= VideoManager_OnVideoFinished;
+		videoManager.OnVideoStarted -= VideoManager_OnVideoStarted;
 		AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(SCORE_DISPLAY)});
 		FunctionTimer.Create(AnimateGameOverButtons, 2.5f);
 	}
@@ -61,11 +63,5 @@ public class GameOverUI : AnimatedUI, IHasVideo {
 	private void AnimateGameOverButtons() {
 		AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(GAME_OVER_BUTTONS) });
 	}
-
-	//private void UIAnimator_OnAnimatorFinished(object sender, UIAnimator.OnAnimationFinishedEventArgs e) {
-	//	throw new NotImplementedException();
-	//}
-
-
 
 }

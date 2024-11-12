@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
 		public int scoreValue;
 	}
 
-	[SerializeField] private GameInput gameInput;
+	[SerializeField] private GameController gameController;
 	[SerializeField] private float _speed = 5;
 	[SerializeField] private PlayerHitBox playerHitBox;
 
@@ -25,16 +25,17 @@ public class PlayerController : MonoBehaviour {
 
 
 	private void Awake() {
+		gameController.OnGameEnd += GameController_OnGameEnd;
 		playerHitBox.OnHitboxHit += PlayerHitBox_OnHitboxHit;
-		gameInput.OnPunch += GameInput_OnPunch;
 		coll = playerHitBox.GetComponent<Collider>();
 	}
 
+	private void Start() {
+		GameInput.Instance.OnPunch += GameInput_OnPunch;
+	}
+
 	private void PlayerHitBox_OnHitboxHit(object sender, PlayerHitBox.OnHitboxHitEventArgs e) {
-		//Debug.Log(e.furnitureObject);
-		//Debug.Log("OnHitboxHit");
 		if (e.furnitureObject.GetCurrentHp() <= 1) {
-			//Debug.Log("0hp!");
 			FurnitureObjectSO furnitureObjectSO = e.furnitureObject.GetFurnitureObjectSO();
 			OnFurnitureDestroyed?.Invoke(this, new OnFurnitureDestroyedEventArgs {
 				scoreValue = furnitureObjectSO.scoreValue
@@ -59,8 +60,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void HandleMovement() {
-
-		Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+		Vector2 inputVector = GameInput.Instance.GetMovementVectorNormalized();
 		inputVector = Quaternion.Euler(0, 0, -45) * inputVector;
 		moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 		if (moveDir != Vector3.zero) {
@@ -113,7 +113,11 @@ public class PlayerController : MonoBehaviour {
 		transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
 	}
 
-
+	private void GameController_OnGameEnd(object sender, EventArgs e) {
+		gameController.OnGameEnd -= GameController_OnGameEnd;
+		playerHitBox.OnHitboxHit -= PlayerHitBox_OnHitboxHit;
+		GameInput.Instance.OnPunch -= GameInput_OnPunch;
+	}
 
 	private void EnableCollider() {
 		coll.enabled = true;

@@ -13,8 +13,6 @@ public class PlayerHitBox : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other) {
 		if (CheckColliderTag(other.gameObject.tag)) {
-			//Debug.Log(other.gameObject);
-			//Debug.Log("OnTriggerEnter");
 			OnHitboxHit?.Invoke(this, new OnHitboxHitEventArgs { 
 				furnitureObject = other.gameObject.GetComponent<FurnitureObject>()
 			});

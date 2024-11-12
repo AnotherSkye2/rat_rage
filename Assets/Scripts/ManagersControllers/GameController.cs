@@ -129,6 +129,11 @@ public class GameController : MonoBehaviour {
 		Debug.Log("Game ended!");
 		scoreManager.SetScore(score);
 		state = State.End;
+		gameUI.OnPauseMenuButtonPressed -= GameUI_OnPauseMenuButtonPressed;
+		player.OnFurnitureDestroyed -= Player_OnFurnitureDestroyed;
+		GameInput.Instance.OnAnyKeyPressed -= GameInput_OnAnyKeyPressed;
+		GameInput.Instance.OnWrongKeyPressed -= GameInput_OnWrongKeyPressed;
+		GameInput.Instance.OnPauseAction -= GameInput_OnPauseAction;
 		OnGameEnd?.Invoke(this, EventArgs.Empty);
 		SceneLoader.Load(SceneLoader.Scene.End);
 	}

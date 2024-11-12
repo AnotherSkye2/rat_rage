@@ -19,7 +19,6 @@ public class VideoManager : MonoBehaviour {
 	private void Awake() {
 		videoPlayer.targetTexture.Release();
 		videoPlayer.targetTexture.Create();
-		Debug.Log(videoPlayer.frame);
 		videoPlayer.Prepare();
 		videoPlayer.prepareCompleted += VideoPlayer_prepareCompleted;
 		videoPlayer.started += VideoPlayer_started;
@@ -66,6 +65,9 @@ public class VideoManager : MonoBehaviour {
 		}
 		if (videoStarted) {
 			if (!videoPlayer.isPlaying) {
+				videoPlayer.prepareCompleted -= VideoPlayer_prepareCompleted;
+				videoPlayer.started -= VideoPlayer_started;
+				hasVideo.OnPlay -= HasVideo_OnPlay;
 				OnVideoFinished?.Invoke(this, EventArgs.Empty);
 				videoStarted = false;
 			}

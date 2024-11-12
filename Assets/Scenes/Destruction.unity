@@ -5922,7 +5922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumRebindTimerRange: 5
   maximumRebindTimerRange: 12
-  gameTime: 999
+  gameTime: 90
   scoreManager: {fileID: 1348327727}
   gameUI: {fileID: 1740563631}
   player: {fileID: 679211769}
@@ -10573,6 +10573,11 @@ PrefabInstance:
       propertyPath: playerHitBox
       value: 
       objectReference: {fileID: 526741934}
+    - target: {fileID: 1390807250504909246, guid: 101c3dcbc749e7941a8f482c99525485,
+        type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 484924129}
     - target: {fileID: 3396517039003869517, guid: 101c3dcbc749e7941a8f482c99525485,
         type: 3}
       propertyPath: m_LocalPosition.x

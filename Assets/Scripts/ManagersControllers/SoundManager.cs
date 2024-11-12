@@ -57,8 +57,6 @@ public static class SoundManager {
 
 	}
 
-
-
 	public static void PlaySound(Sound sound) {
 		if (CanPlaySound(sound)) {
 			if (oneShotGameObject == null) {
