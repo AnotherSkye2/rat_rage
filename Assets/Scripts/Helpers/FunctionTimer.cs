@@ -12,6 +12,7 @@ public class FunctionTimer {
 		gameObject.GetComponent<MonoBehaviourHook>().onUpdate = functionTimer.Update;
 		return functionTimer;
 	}
+
 	public class MonoBehaviourHook : MonoBehaviour {
 		public Action onUpdate;
 		private void Update() {

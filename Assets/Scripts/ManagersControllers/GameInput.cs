@@ -8,11 +8,14 @@ using System.Diagnostics.Tracing;
 using UnityEngine.InputSystem.Utilities;
 using UnityEngine.InputSystem.LowLevel;
 
-public class GameInput : MonoBehaviour
-{
+public class GameInput : MonoBehaviour {
+
+	public static GameInput Instance { get; private set; }
+
 	public event EventHandler OnPunch;
 	public event EventHandler OnAnyKeyPressed;
 	public event EventHandler OnWrongKeyPressed;
+	public event EventHandler OnPauseAction;
 
 
 	[SerializeField] private float minimumRebindTimerRange, maximumRebindTimerRange;
@@ -22,10 +25,16 @@ public class GameInput : MonoBehaviour
 	private PlayerInputActions playerInputActions;
 
 	private void Awake() {
+		Instance = this;
 		gameController.OnRebind += GameController_OnRebind ;
 		playerInputActions = new PlayerInputActions();
 		playerInputActions.Player.Enable();
+		playerInputActions.Player.Pause.performed += Pause_performed;
 		hitButton = KeyCode.RightControl;
+	}
+
+	private void Pause_performed(InputAction.CallbackContext obj) {
+		OnPauseAction?.Invoke(this, EventArgs.Empty); 
 	}
 
 	private void Start() {
@@ -50,21 +59,11 @@ public class GameInput : MonoBehaviour
 		hitButton = (KeyCode)e.key;
 	}
 
-
-	private void Update() {
-		if (Input.GetKeyDown(hitButton)) {
-			OnPunch?.Invoke(this, EventArgs.Empty);
-		}		
-		if (Input.anyKey) {
-			OnAnyKeyPressed?.Invoke(this, EventArgs.Empty);
-		}
-
-	}
-
 	private void OnButtonPressed(InputControl button) {
-		//Checking if the current button pressed is WASD, hitbutton and R.Ctrl
-		//Debug.Log(gameController.GetState());
-		if (button.name != "w" && button.name != "a" && button.name != "s" && button.name != "d" && button.name != hitButton.ToString().ToLower() && (button.name != "rightCtrl" || hitButton != KeyCode.RightControl)) {
+		//Debug.Log(button.name);
+		if (button.name != "escape") { OnAnyKeyPressed?.Invoke(this, EventArgs.Empty); }
+		if (button.name == hitButton.ToString().ToLower()) { OnPunch?.Invoke(this, EventArgs.Empty); }
+		if (button.name != "w" && button.name != "a" && button.name != "s" && button.name != "escape" && button.name != "d" && button.name != hitButton.ToString().ToLower() && (button.name != "rightCtrl" || hitButton != KeyCode.RightControl)) {
 			OnWrongKeyPressed?.Invoke(this, EventArgs.Empty);
 		}
 	}

@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour {
 
 	public event EventHandler OnGameStart;
+	public event EventHandler<OnGamePausedEventArgs> OnGamePaused;
+
+	public class OnGamePausedEventArgs : EventArgs {
+		public bool isPaused;
+	}
+
 	public event EventHandler OnGameEnd;
 
 	public event EventHandler<OnRebindEventArgs> OnRebind;
@@ -19,36 +25,50 @@ public class GameController : MonoBehaviour {
 		Playing,
 		Paused,
 		End,
+		Default,
 	}
 
 
 	[SerializeField] private float minimumRebindTimerRange, maximumRebindTimerRange;
-	[SerializeField] private float gameDuration;
-	[SerializeField] private GameInput gameInput;
+	[SerializeField] private float gameTime;
 	[SerializeField] private ScoreManager scoreManager;
 	[SerializeField] private PlayerController player;
 	[SerializeField] public  Material destroyedMaterial;
 
 
-	private string previousKey;
 	private KeyCode hitButton;
 	private FunctionLooper rebindLooper;
-	private FunctionTimer gameTimer;
+	private FunctionTimer gameFunctionTimer;
 	private int score;
 	private State state;
+	private State stateBeforePause;
 
 	private void Awake() {
-		state = State.WaitingForStart;
 		player.OnFurnitureDestroyed += Player_OnFurnitureDestroyed;
-		gameInput.OnAnyKeyPressed += GameInput_OnAnyKeyPressed;
-		gameInput.OnWrongKeyPressed += GameInput_OnWrongKeyPressed;
 	}
 
 
 	private void Start() {
+
+		state = State.WaitingForStart;
+		stateBeforePause = state;
+		GameInput.Instance.OnAnyKeyPressed += GameInput_OnAnyKeyPressed;
+		GameInput.Instance.OnWrongKeyPressed += GameInput_OnWrongKeyPressed;
+		GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
 		rebindLooper = new FunctionLooper(Rebind, UnityEngine.Random.Range(minimumRebindTimerRange, maximumRebindTimerRange));
 		SoundManager.Initialize();
-		//SoundManager.LoopSound(SoundManager.Sound.Music);
+		SoundManager.LoopSound(SoundManager.Sound.Music);
+	}
+	private void Update() {
+		scoreManager.SetScore(score);
+		rebindLooper.Update();
+	}
+
+	private void GameInput_OnPauseAction(object sender, EventArgs e) {
+		if (state != State.Paused) {
+			stateBeforePause = state;
+		}
+		PauseGame();
 	}
 
 	private void Player_OnFurnitureDestroyed(object sender, PlayerController.OnFurnitureDestroyedEventArgs e) {
@@ -60,17 +80,13 @@ public class GameController : MonoBehaviour {
 		if (state == State.WaitingForStart) {
 			state = State.Playing;
 			OnGameStart?.Invoke(this, EventArgs.Empty);
-			gameTimer = FunctionTimer.Create(EndGame, gameDuration);
+			gameFunctionTimer = FunctionTimer.Create(EndGame, gameTime);
 		}
 	}
 	private void GameInput_OnWrongKeyPressed(object sender, EventArgs e) {
 		SoundManager.PlaySound(SoundManager.Sound.WrongHitButtonPress);
 	}
 
-	private void Update() {
-		scoreManager.SetScore(score);
-		rebindLooper.Update();
-	}
 
 
 	private void Rebind() {
@@ -92,9 +108,22 @@ public class GameController : MonoBehaviour {
 	private void EndGame() {
 		Debug.Log("Game ended!");
 		scoreManager.SetScore(score);
+		state = State.End;
 		OnGameEnd?.Invoke(this, EventArgs.Empty);
 		SceneLoader.Load(SceneLoader.Scene.End);
 	}
+
+	private void PauseGame() {
+		if (state != State.Paused) {
+			state = State.Paused;
+			Time.timeScale = 0f;
+		} else {
+			state = stateBeforePause;
+			Time.timeScale = 1f;
+		}
+		OnGamePaused?.Invoke(this, new OnGamePausedEventArgs { isPaused = state == State.Paused});
+	}
+
 
 	public int GetScore() {
 		return score;
@@ -103,12 +132,11 @@ public class GameController : MonoBehaviour {
 	public State GetState() {
 		return state;
 	}
-
-	public float GetGameTimeRemaining() {
-		if (state != State.WaitingForStart) {
-			return gameTimer.GetTime();
-		}
-		return gameDuration;
+	public float GetGameTime() {		
+		return gameTime;
 	}
 
+	public float GetGameTimeRemaining() {
+		return gameFunctionTimer.GetTime();
+	}
 }

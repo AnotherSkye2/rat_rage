@@ -16,11 +16,15 @@ public class GameTimer : MonoBehaviour {
 
 	private void Awake() {
 		Text = GetComponentInChildren<TMP_Text>();
+		timerDuration = gameController.GetGameTime();
 	}
 
 	private void Update() {
-		timerDuration = gameController.GetGameTimeRemaining();
-		Debug.Log(timerDuration);
+		//Debug.Log(gameController);
+		//Debug.Log(timerDuration);
+		if (gameController.GetState() == GameController.State.Playing) { 
+			timerDuration = gameController.GetGameTimeRemaining();
+		}
 		string seconds = ((int)(timerDuration % 60)).ToString();
 		switch (timerDuration) {
 			case < 1f:
