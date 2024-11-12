@@ -69,7 +69,7 @@ public class GameInput : MonoBehaviour {
 	private void OnButtonPressed(InputControl button) {
 		//Debug.Log(button.name);
 		if (button.name != "escape") { OnAnyKeyPressed?.Invoke(this, EventArgs.Empty); }
-		if (button.name == hitButton.ToString().ToLower()) { OnPunch?.Invoke(this, EventArgs.Empty); }
+		if (button.name == hitButton.ToString().ToLower() || (button.name == "rightCtrl" && hitButton == KeyCode.RightControl)) { OnPunch?.Invoke(this, EventArgs.Empty); }
 		if (button.name != "w" && button.name != "a" && button.name != "s" && button.name != "escape" && button.name != "d" && button.name != hitButton.ToString().ToLower() && (button.name != "rightCtrl" || hitButton != KeyCode.RightControl)) {
 			OnWrongKeyPressed?.Invoke(this, EventArgs.Empty);
 		}
