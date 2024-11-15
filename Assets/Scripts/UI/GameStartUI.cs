@@ -17,14 +17,16 @@ public class GameStartUI : AnimatedUI, IHasVideo {
 
 	
 	[SerializeField] private VideoManager videoManager;
-	[SerializeField] private Canvas canvas;
 	[SerializeField] private GameObject startButtonImageWithStroke;
 	[SerializeField] private Button startButton;
 	[SerializeField] private Button quitButton;
 
+	private AnimatedUIElement startUICanvas;
 
 	private void Start() {
+		startUICanvas = GetUIElementByName(START_UI_CANVAS);
 		GetUIAnimator().OnAnimationFinished += UIAnimator_OnAnimationFinished;
+		videoManager.OnVideoStarted += VideoManager_OnVideoStarted;
 		videoManager.OnVideoFinished += VideoManager_OnVideoFinished;
 
 		ButtonUI startButtonUI = startButton.gameObject.GetComponent<ButtonUI>();
@@ -36,8 +38,12 @@ public class GameStartUI : AnimatedUI, IHasVideo {
 		InvokeRepeating("Blink", 1f, 1f);
 	}
 
+	private void VideoManager_OnVideoStarted(object sender, EventArgs e) {
+		startUICanvas.gameObject.SetActive(false);
+	}
+
 	private void StartButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
-		AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(START_UI_CANVAS) });
+		AnimateUI(new List<AnimatedUIElement> { startUICanvas });
 	}
 	private void QuitButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
 		Application.Quit();

@@ -6,8 +6,8 @@ using System;
 
 public class VideoManager : MonoBehaviour {
 
-	public event EventHandler OnVideoFinished;
 	public event EventHandler OnVideoStarted;
+	public event EventHandler OnVideoFinished;
 
 	[SerializeField] private GameObject hasVideoGameObject;
 	[SerializeField] private VideoPlayer videoPlayer;
