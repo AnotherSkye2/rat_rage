@@ -37,9 +37,13 @@ public class GameStartUI : AnimatedUI, IHasVideo {
 	}
 
 	private void StartButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
+		startButton.interactable = false;
+		quitButton.interactable = false;
 		AnimateUI(new List<AnimatedUIElement> { GetUIElementByName(START_UI_CANVAS) });
 	}
 	private void QuitButtonUI_OnAudioClipFinished(object sender, EventArgs e) {
+		startButton.interactable = false;
+		quitButton.interactable = false;
 		Application.Quit();
 	}
 
