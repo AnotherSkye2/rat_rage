@@ -69,7 +69,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][Assets\Visuals\UI elements\Start Menu Without Button.png]](https://imgur.com/a/rat-race-LxDCQR3)
+![Alt text][product-screenshot]
+
+Our team's TalTech GameCamp Lite 2024 entry, with the theme Out of Control, about a really pissed off rat. Made in 48 hours with lovely people such as 
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -143,5 +146,6 @@ My itch.io: [https://anotherskye.itch.io](https://anotherskye.itch.io)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: rat_rage_banner.png
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/skye-hakomaa-0k0/
