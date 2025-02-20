@@ -71,7 +71,7 @@
 
 ![Alt text][product-screenshot]
 
-Our team's TalTech GameCamp Lite 2024 entry, with the theme Out of Control, about a really pissed off rat. Made in 48 hours with lovely people such as 
+Our team's TalTech GameCamp Lite 2024 entry, with the theme Out of Control, about a really pissed off rat. Made in 48 hours with lovely people such as Silmamunasupp, owlpun, Rotitapja, Truffle and me, AnotherSkye!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
