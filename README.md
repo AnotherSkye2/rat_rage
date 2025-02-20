@@ -26,7 +26,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/AnotherSkye2/rat_rage">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="README_images/rat.png" alt="Logo" width="80" height="80">
   </a>
 
 <h2 align="center">Rat Rage</h2>
@@ -146,6 +146,6 @@ My itch.io: [https://anotherskye.itch.io](https://anotherskye.itch.io)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: rat_rage_banner.png
+[product-screenshot]: README_images/rat_rage_banner.png
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/skye-hakomaa-0k0/
